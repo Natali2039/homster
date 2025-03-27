@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .b {
+        width: 12px;
+        height: 12px;
+      }
+      .a {
+        width: 200px;
+        height: 200px;
+        border-radius: 15%;
+        transition: transform 0.2s ease;
+      }
+      body {
+        background-color: black;
+      }
+      p {
+        color: white;
+      }
+      .main-content {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 25%;
+        width: 50%;
+      }
+      p {
+        color: black;
+        font-weight: 900;
+      }
+      .button-img {
+        margin-top: 10px;
+        border-radius: 15%;
+        transition: transform 0.2s ease; 
+      }
+      /* Додано збільшення кнопки при наведенні */
+      #monetka:hover {
+        transform: scale(1.1); /* Збільшення на 10% */
+        transition: transform 0.2s ease; /* Плавна анімація */
+      }
+    </style>
+    <title>Page Data Viewer</title>
+  </head>
+
+  <body>
+    <center>
+      <div align="center" class="main-content">
+        <button class="button-img" id="countButton">
+          <img class="a" id="hamster" src="хамак.png" />
+        </button>
+        <p id="clickCount">
+          <img class="b" src="монетка.png" /> 0
+        </p>
+        <button id="monetka">
+          Прокачка за 20<img class="b" src="монетка.png" /> <br />
+          додає 2<img class="b" src="монетка.png" />
+        </button>
+        <button id="autoclickerButton">
+            Автоклікер: Включити
+        </button>
+      </div>
+    </center>
+
+    <script>
+      let point = 1;
+      let lvl = 1;
+      let countButton = document.getElementById("countButton");
+      let clickCount = document.getElementById("clickCount");
+      let upgradeLvl = document.getElementById("monetka");
+      let hamster = document.getElementById("hamster"); // Отримуємо елемент хомяка
+
+      let clicks = 0;
+      let price = 20;
+      let degree = 0;
+
+      let autoclickerActive = false;
+      let autoclickerInterval = null;
+
+      countButton.onclick = function () {
+        countButton.style.transform = `rotate(${degree+=45}deg)`;
+        clicks += point;
+        clickCount.innerHTML = `<img class="b" src="монетка.png"> ${clicks}`;
+      };
+
+      upgradeLvl.onclick = function () {
+
+        if (lvl == 1) {
+          if (clicks >= price) {
+            clicks -= price;
+            price = 50;
+            point = 5;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        }
+        else if (lvl == 2) {
+          if (clicks >= price) {
+            clicks -= price;
+            price = 100;
+            point = 10;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        } else if (lvl == 3) {
+          if (clicks >= price) {
+            clicks -= price;
+            price = 200;
+            point = 20;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        } else if (lvl == 4) {
+          if (clicks >= price) {
+            clicks -= price;
+            price = 500;
+            point = 50;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        } else if (lvl == 5) {
+          if (clicks >= price) {
+            clicks -= price;
+            price = 1000;
+            point = 100;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        } else if (lvl >= 6) {
+          if (clicks >= price) {
+            clicks -= price;
+            price += 1000;
+            point += 100;
+            lvl += 1;
+            upgradeLvl.innerHTML = `Прокачати за ${price}<img class="b" src="монетка.png"> <br> додає ${point}<img class="b" src="монетка.png">`;
+          } else {
+            alert("Not enough money");
+          }
+        }
+      };
+
+       // Функція для активації/деактивації автоклікера
+       document.getElementById("autoclickerButton").onclick = function () {
+        if (autoclickerActive) {
+          // Якщо автоклікер вже активний, зупинити його
+          clearInterval(autoclickerInterval);
+          autoclickerInterval = null;
+          autoclickerActive = false;
+          this.innerHTML = "Автоклікер: Включити";
+        } else {
+          // Якщо автоклікер не активний, активувати його
+          autoclickerInterval = setInterval(function () {
+            clicks += point;
+            clickCount.innerHTML = `<img class="b" src="монетка.png"> ${clicks}`;
+          }, 500); // Кожну секунду
+          autoclickerActive = true;
+          this.innerHTML = "Автоклікер: Вимкнути";
+        }
+      };
+
+    </script>
+  </body>
+</html>
