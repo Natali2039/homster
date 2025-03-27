@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<style>
+			.b{
+				width: 12px;
+				height: 12px;
+			}
+			.a{
+				width: 200px;
+				height: 200px;
+			}
+			body{
+				background-color: black;
+			}
+			p{
+				color: white;
+			}
+		</style>
+		<title>Page Data Viewer</title>
+	</head>
+
+	<body>
+		<button id="countButton"><img class="a" src="хамак.png"></button>
+		<p id="clickCount"><img class="b" src="монетка.png"> 0</p>
+		<button id="monetka">за 20<img class="b" src="монетка.png"> <br> додає 2<img class="b" src="монетка.png"></button>
+		<button id="coin">за 50<img class="b" src="монетка.png"> <br> додає 5<img class="b" src="монетка.png"></button>
+		<button id="coin1">за 100<img class="b" src="монетка.png"> <br> додає 10<img class="b" src="монетка.png"></button>
+		<button id="coin2">за 200<img class="b" src="монетка.png"> <br> додає 20<img class="b" src="монетка.png"></button>
+	<script>
+		let point = 1;
+		let lvl = 1;
+		let countButton = document.getElementById("countButton");
+		let clickCount = document.getElementById("clickCount");
+		// let upgradeLvl = document.getElementById("monetka"); //ivan
+		let upgradeLvl1 = document.getElementById("monetka");
+		let upgradeLvl2 = document.getElementById("coin");
+		let upgradeLvl3 = document.getElementById("coin1");
+		let upgradeLvl4 = document.getElementById("coin2");
+
+
+		let clicks = 0;
+		let price = 20; // Початкова ціна
+		countButton.onclick = function () {
+		clicks+=point;
+		clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+		};
+
+		//Ivan
+		// upgradeLvl.onclick = function () {
+		// 	if(clicks>= price){
+		// 		clicks-=price;     //clicks=100-20 (Заплатили)
+		// 		price *=lvl;
+		// 		lvl+=1
+		// 		point+=lvl;          // point = point + 1
+		// 		clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+		// 		upgradeLvl.innerHTML = `<button id="monetka"> Купуємо за ${price}<img class="b" src="монетка.png"> <br> додає ${lvl}<img class="b" src="монетка.png"></button>`;
+ 		// 	 }
+		// 	else{
+		// 		alert("Not enough money");
+		// 	}
+		// }
+
+
+		upgradeLvl1.onclick = function(){
+			if(clicks>=20){
+				clicks-=20
+				point=2
+				clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+			}
+			else{
+				alert("недостатньо монет")
+			}
+		};
+
+		upgradeLvl2.onclick = function(){
+			point=5
+			if(clicks>=50){
+				clicks-=50
+				point=5
+				clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+			}
+			else{
+				alert("недостатньо монет")
+			}
+		};
+
+		upgradeLvl3.onclick = function(){
+			point=5
+			if(clicks>=100){
+				clicks-=100
+				point=10
+				clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+			}
+			else{
+				alert("недостатньо монет")
+			}
+		};
+
+		upgradeLvl4.onclick = function(){
+			point=5
+			if(clicks>=200){
+				clicks-=200
+				point=20
+				clickCount.innerHTML = `<p id="clickCount"><img class="b" src="монетка.png"> ${clicks}</p>`;
+			}
+			else{
+				alert("недостатньо монет")
+			}
+		};
+
+		
+		
+	</script>
+	</body>
+</html>
